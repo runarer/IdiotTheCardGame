@@ -1,6 +1,8 @@
+using IdiotGameCore.Interfaces;
+
 namespace IdiotGameCore.Model;
 
-public class Game(GameOptions options)
+public class Game(GameOptions options) : IGame
 {
     private readonly GameOptions _options = options;
     public async Task<bool> PlayCard(Player player, Card card)
