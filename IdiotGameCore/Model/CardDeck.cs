@@ -13,7 +13,7 @@ public class CardDeck
         Card[] cards = new Card[numberOfCards];
 
         int index = 0;
-        for (int deckNumber = 1; deckNumber < numberOfDecks; deckNumber++)
+        for (int deckNumber = 1; deckNumber <= numberOfDecks; deckNumber++)
         {
             foreach (var suit in Enum.GetValues<Suits>())
             {

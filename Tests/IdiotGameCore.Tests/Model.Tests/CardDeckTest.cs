@@ -22,6 +22,7 @@ public class CardDeckTest
     [InlineData(1, 0, Suits.Diamond, Values.Ace, 1)]
     [InlineData(2, 1, Suits.Joker, Values.Joker, 2)]
     [InlineData(3, 0, Suits.Heart, Values.Ten, 3)]
+    [InlineData(3, 2, Suits.Heart, Values.Ten, 3)]
     [InlineData(3, 2, Suits.Joker, Values.Joker, 3)]
     public void Deck_CreateDeck_DeckCreatedAndContainsTheseCards(int decks, int jokers, Suits suitOfExpectedCard, Values valueOfExpectedCard, int deckOfExpectedCard)
     {
