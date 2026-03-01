@@ -3,8 +3,10 @@ namespace IdiotGameCore.Model;
 
 public record GameOptions
 {
-    public static readonly int MAX_PLAYERS = 8;
-    public static readonly int MAX_DECKS = 3;
+    public const int MaxPlayer = 8;
+    public const int MaxDecks = 3;
+    public const int MinPlayers = 2;
+    public const int MinDecks = 1;
     public int PlayerNumber;
     public int DeckNumber;
     public bool Joker;
@@ -14,14 +16,14 @@ public record GameOptions
         Joker = joker;
 
         // Validate player number
-        if (playerNumber < 1 || playerNumber > MAX_PLAYERS)
-            throw new InvalidOperationException($"Unaccepted number of players :{playerNumber}, need to be between 1 and {MAX_PLAYERS}!");
+        if (playerNumber < MinPlayers || playerNumber > MaxPlayer)
+            throw new InvalidOperationException($"Unaccepted number of players :{playerNumber}, need to be between 1 and {MaxPlayer}!");
 
         PlayerNumber = playerNumber;
 
         // Validate number of decks        
-        if (decks < 1 || decks > MAX_DECKS)
-            throw new InvalidOperationException($"Unaccepted number of decks :{decks}, need to be between 1 and {MAX_DECKS}!");
+        if (decks < MinDecks || decks > MaxDecks)
+            throw new InvalidOperationException($"Unaccepted number of decks :{decks}, need to be between 1 and {MaxDecks}!");
         if (decks * (joker ? 54 : 52) < playerNumber * 9)
             throw new InvalidOperationException("Not enough cards for the number of players!");
 
