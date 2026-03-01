@@ -8,6 +8,7 @@ public class GameOptionsTest
     [InlineData(2, 1, false)]
     [InlineData(5, 2, true)]
     [InlineData(8, 3, true)]
+    [InlineData(6, 1, true)]
     public void GameOptions_CreateAGameWithValidInput_ObjectCreated(int players, int decks, bool joker)
     {
 
@@ -23,31 +24,34 @@ public class GameOptionsTest
     [Fact]
     public void GameOptions_CreateAGameWithToFewPlayers_ThrowsInvalidOperationsException()
     {
-        throw new NotImplementedException("Test not yet implemented");
+        Assert.Throws<InvalidOperationException>(() => new GameOptions(1, 1, false));
     }
 
     [Fact]
     public void GameOptions_CreateAGameWithToManyPlayers_ThrowsInvalidOperationsException()
     {
-        throw new NotImplementedException("Test not yet implemented");
+        Assert.Throws<InvalidOperationException>(() => new GameOptions(9, 3, false));
     }
 
     [Fact]
     public void GameOptions_CreateAGameWithToFewDecks_ThrowsInvalidOperationsException()
     {
-        throw new NotImplementedException("Test not yet implemented");
+        Assert.Throws<InvalidOperationException>(() => new GameOptions(4, 0, false));
     }
 
     [Fact]
     public void GameOptions_CreateAGameWithToManyDecks_ThrowsInvalidOperationsException()
     {
-        throw new NotImplementedException("Test not yet implemented");
+        Assert.Throws<InvalidOperationException>(() => new GameOptions(2, 4, false));
     }
 
-    [Fact]
-    public void GameOptions_CreateAGameWithToFewDecksForNumberOfPlayers_ThrowsInvalidOperationsException()
+
+    [Theory]
+    [InlineData(7, 1, true)]
+    [InlineData(6, 1, false)]
+    public void GameOptions_CreateAGameWithToFewDecksForNumberOfPlayers_ThrowsInvalidOperationsException(int players, int decks, bool joker)
     {
-        throw new NotImplementedException("Test not yet implemented");
+        Assert.Throws<InvalidOperationException>(() => new GameOptions(players, decks, joker));
     }
 
 }
