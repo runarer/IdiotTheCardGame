@@ -9,6 +9,12 @@ public class Player(string alias, Game game)
     public Card?[] BottomTableCards = new Card?[TableCardStacks];
     public Card?[] TopTableCards = new Card?[TableCardStacks];
 
+    // public Player(string alias, Game game)
+    // {
+    //     Alias = alias;
+    //     _game = game;
+    // }
+
     /// <summary>
     /// Play a card fromt the hand.
     /// There are checks to make sure the player owns the card and it's in their hand.
@@ -22,7 +28,7 @@ public class Player(string alias, Game game)
         if (!Hand.Contains(card))
             return null;
 
-        if (await game.PlayCard(this, card))
+        if (await _game.PlayCard(this, card))
         {
             Hand.Remove(card);
             return card;
@@ -52,7 +58,7 @@ public class Player(string alias, Game game)
         if (TopTableCards[tableStack] is null)
             return null;
 
-        if (await game.PlayCard(this, (Card)TopTableCards[tableStack]!))
+        if (await _game.PlayCard(this, (Card)TopTableCards[tableStack]!))
         {
             TopTableCards[tableStack] = null;
             return TopTableCards[tableStack];
@@ -82,7 +88,7 @@ public class Player(string alias, Game game)
         if (BottomTableCards[tableStack] is null)
             return null;
 
-        if (await game.PlayCard(this, (Card)BottomTableCards[tableStack]!))
+        if (await _game.PlayCard(this, (Card)BottomTableCards[tableStack]!))
         {
             TopTableCards[tableStack] = null;
             return TopTableCards[tableStack];

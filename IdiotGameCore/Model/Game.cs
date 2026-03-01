@@ -2,6 +2,7 @@ namespace IdiotGameCore.Model;
 
 public class Game(GameOptions options)
 {
+    private readonly GameOptions _options = options;
     public async Task<bool> PlayCard(Player player, Card card)
     {
         return true;
