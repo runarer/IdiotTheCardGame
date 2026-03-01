@@ -1,19 +1,15 @@
+using IdiotGameCore.Interfaces;
+
 namespace IdiotGameCore.Model;
 
-public class Player(string alias, Game game)
+public class Player(string alias, IGame game)
 {
     public const int TableCardStacks = 3;
-    private Game _game = game;
-    public required string Alias { get; init; } = alias;
+    private IGame _game = game;
+    public string Alias = alias;
     public HashSet<Card> Hand { get; private set; } = [];
     public Card?[] BottomTableCards = new Card?[TableCardStacks];
     public Card?[] TopTableCards = new Card?[TableCardStacks];
-
-    // public Player(string alias, Game game)
-    // {
-    //     Alias = alias;
-    //     _game = game;
-    // }
 
     /// <summary>
     /// Play a card fromt the hand.
@@ -60,8 +56,9 @@ public class Player(string alias, Game game)
 
         if (await _game.PlayCard(this, (Card)TopTableCards[tableStack]!))
         {
+            var returnCard = TopTableCards[tableStack];
             TopTableCards[tableStack] = null;
-            return TopTableCards[tableStack];
+            return returnCard;
         }
 
         return null;
@@ -90,8 +87,9 @@ public class Player(string alias, Game game)
 
         if (await _game.PlayCard(this, (Card)BottomTableCards[tableStack]!))
         {
-            TopTableCards[tableStack] = null;
-            return TopTableCards[tableStack];
+            var returnCard = BottomTableCards[tableStack];
+            BottomTableCards[tableStack] = null;
+            return returnCard;
         }
 
         return null;
